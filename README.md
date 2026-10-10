@@ -43,7 +43,7 @@ The static site is written to `dist/` and can be deployed as-is to Vercel, Netli
 
 **Resume:** replace `public/assets/Subrata_Sikdar_Resume.pdf`.
 
-**Photo:** replace `pic1.jpeg` (high-res photo) and `pic.png` (background-removed cutout with the same framing), then run:
+**Photo:** replace `pic.png` (high-res photo / cutout), then run:
 
 ```bash
 npm run images

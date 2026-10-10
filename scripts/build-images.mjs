@@ -1,35 +1,35 @@
-// Builds optimized portrait assets from the original photos in the project root.
-// pic1.jpeg = high-resolution source, pic.png = background-removed cutout (same framing).
-// The cutout's alpha mask is upscaled and applied to the high-res photo so the face stays sharp.
+// Builds optimized portrait assets from pic.png (and its cutout) in the project root.
 import sharp from 'sharp';
-import { mkdirSync } from 'node:fs';
+import { mkdirSync, existsSync, copyFileSync } from 'node:fs';
+import { execSync } from 'node:child_process';
 
 const OUT = 'public/assets';
 mkdirSync(OUT, { recursive: true });
 
-const hi = sharp('pic1.jpg');
-const { width, height } = await hi.metadata();
+// Check if cutout exists; if not, generate it from pic.png via Python rembg
+const hasCutout = existsSync('pic_cutout.png') || existsSync(`${OUT}/portrait_cutout.png`);
 
-const alpha = await sharp('pic.png')
-  .ensureAlpha()
-  .extractChannel('alpha')
-  .resize(width, height, { kernel: 'lanczos3' })
-  .blur(0.8)
-  .raw()
-  .toBuffer();
-
-const rgb = await sharp('pic1.jpg').removeAlpha().raw().toBuffer();
-const rgba = Buffer.alloc(width * height * 4);
-for (let i = 0; i < width * height; i++) {
-  rgba[i * 4] = rgb[i * 3];
-  rgba[i * 4 + 1] = rgb[i * 3 + 1];
-  rgba[i * 4 + 2] = rgb[i * 3 + 2];
-  rgba[i * 4 + 3] = alpha[i];
+if (!hasCutout) {
+  console.log('Generating cutout from pic.png via scripts/build_subrata_assets.py...');
+  execSync('python scripts/build_subrata_assets.py', { stdio: 'inherit' });
 }
-const cutout = await sharp(rgba, { raw: { width, height, channels: 4 } }).png().toBuffer();
+
+const sourceFile = existsSync(`${OUT}/portrait_cutout.png`)
+  ? `${OUT}/portrait_cutout.png`
+  : 'pic_cutout.png';
+
+// Ensure root pic_cutout.png and public/assets/portrait_cutout.png stay in sync
+if (existsSync(`${OUT}/portrait_cutout.png`) && existsSync('pic_cutout.png')) {
+  copyFileSync(`${OUT}/portrait_cutout.png`, 'pic_cutout.png');
+}
+
+const cutout = await sharp(sourceFile).toBuffer();
 
 for (const w of [1100, 720, 420]) {
-  await sharp(cutout).resize({ width: w }).webp({ quality: 86, alphaQuality: 90 }).toFile(`${OUT}/portrait-${w}.webp`);
+  await sharp(cutout)
+    .resize({ width: w })
+    .webp({ quality: 88, alphaQuality: 92 })
+    .toFile(`${OUT}/portrait-${w}.webp`);
 }
 
 // Social share image (1200x630) on a dark backdrop
@@ -53,4 +53,5 @@ await sharp({ create: { width: 1200, height: 630, channels: 4, background: '#070
   ])
   .jpeg({ quality: 85 })
   .toFile(`${OUT}/og-image.jpg`);
-console.log('images built');
+
+console.log('Images built successfully from pic.png');
