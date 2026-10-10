@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="100%" height="100%">
+  <defs>
+    <linearGradient id="prompt-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#BD53ED" />
+      <stop offset="100%" stop-color="#4CC9FF" />
+    </linearGradient>
+  </defs>
+  <!-- Command prompt terminal cursor & sparkle -->
+  <rect x="8" y="12" width="48" height="40" rx="8" fill="none" stroke="url(#prompt-grad)" stroke-width="3" />
+  <path d="M18 26 L26 32 L18 38" fill="none" stroke="url(#prompt-grad)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+  <line x1="30" y1="38" x2="42" y2="38" stroke="#4CC9FF" stroke-width="3" stroke-linecap="round" />
+  <!-- Floating magic star -->
+  <path d="M46 20 C46 22 44.5 24 42.5 24 C44.5 24 46 26 46 28 C46 26 47.5 24 49.5 24 C47.5 24 46 22 46 20 Z" fill="#FFD166" />
+</svg>

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="100%" height="100%">
+  <defs>
+    <linearGradient id="vibe-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF3D5A" />
+      <stop offset="50%" stop-color="#BD53ED" />
+      <stop offset="100%" stop-color="#4CC9FF" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="1.5" result="glow" />
+      <feComposite in="SourceGraphic" in2="glow" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Left Bracket < -->
+  <path d="M18 20 L8 32 L18 44" fill="none" stroke="url(#vibe-grad)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+
+  <!-- Right Bracket > -->
+  <path d="M46 20 L56 32 L46 44" fill="none" stroke="url(#vibe-grad)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+
+  <!-- Center AI Radiant Star -->
+  <path d="M32 14 C32 23 23 32 14 32 C23 32 32 41 32 50 C32 41 41 32 50 32 C41 32 32 23 32 14 Z" fill="url(#vibe-grad)" filter="url(#glow)" />
+
+  <!-- Mini Sparkle Top Right -->
+  <path d="M47 10 C47 13.5 44 16 41 16 C44 16 47 18.5 47 22 C47 18.5 50 16 53 16 C50 16 47 13.5 47 10 Z" fill="#4CC9FF" />
+
+  <!-- Mini Sparkle Bottom Left -->
+  <path d="M17 44 C17 46.5 15 48 13 48 C15 48 17 49.5 17 52 C17 49.5 19 48 21 48 C19 48 17 46.5 17 44 Z" fill="#FF3D5A" />
+</svg>

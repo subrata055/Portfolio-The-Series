@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="100%" height="100%">
+  <defs>
+    <linearGradient id="azStorageGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00BCF2" />
+      <stop offset="100%" stop-color="#0078D4" />
+    </linearGradient>
+    <linearGradient id="azDiskGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#50E6FF" />
+      <stop offset="100%" stop-color="#005A9E" />
+    </linearGradient>
+  </defs>
+  <!-- Storage Container / Cylinder stack -->
+  <ellipse cx="32" cy="14" rx="22" ry="7" fill="url(#azDiskGrad)" />
+  <path d="M10 14 v16 c0 4 10 7 22 7 s22 -3 22 -7 V14" fill="url(#azStorageGrad)" />
+  <ellipse cx="32" cy="30" rx="22" ry="7" fill="url(#azDiskGrad)" />
+  <path d="M10 30 v16 c0 4 10 7 22 7 s22 -3 22 -7 V30" fill="url(#azStorageGrad)" />
+  <ellipse cx="32" cy="46" rx="22" ry="7" fill="url(#azDiskGrad)" />
+  <!-- Node sync connectors -->
+  <circle cx="20" cy="31" r="2.5" fill="#FFFFFF" />
+  <circle cx="32" cy="31" r="2.5" fill="#FFFFFF" />
+  <circle cx="44" cy="31" r="2.5" fill="#FFFFFF" />
+</svg>
